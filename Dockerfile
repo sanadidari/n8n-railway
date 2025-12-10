@@ -1,9 +1,15 @@
+# ----------------------------
+# n8n on Railway - Correct Dockerfile
+# ----------------------------
+
 FROM n8nio/n8n:latest
 
-ENV N8N_PORT=5678
-ENV N8N_HOST=0.0.0.0
-ENV N8N_PROTOCOL=http
+# Set the correct port for Railway
+ENV N8N_PORT=8080
+ENV PORT=8080
 
-EXPOSE 5678
+# Expose Railway port
+EXPOSE 8080
 
-CMD ["n8n", "start"]
+# Start n8n normally
+CMD ["n8n"]
