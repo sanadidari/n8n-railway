@@ -2,9 +2,6 @@
   "name": "n8n-railway",
   "version": "1.0.0",
   "scripts": {
-    "start": "n8n"
-  },
-  "dependencies": {
-    "n8n": "^1.50.0"
+    "start": "n8n start"
   }
 }
