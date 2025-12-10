@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    ports:
+      - "${PORT}:5678"
+    environment:
+      - N8N_HOST=0.0.0.0
+      - N8N_PORT=${PORT}
+      - N8N_PROTOCOL=http
+      - NODE_ENV=production
+    restart: always
