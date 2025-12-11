@@ -1,13 +1,13 @@
 # Railway-compatible n8n build
-FROM n8nio/n8n:1.62.0
+FROM n8nio/n8n:1.84.1
 
-# Railway expects the app to listen on PORT env var
-ENV N8N_PORT=8080
-ENV PORT=8080
+# Railway uses the PORT environment variable
+ENV N8N_PORT=${PORT}
 ENV N8N_HOST=0.0.0.0
+ENV WEBHOOK_URL=https://your-app.up.railway.app/
 
-# Expose correct port
-EXPOSE 8080
+# Expose the port Railway expects
+EXPOSE ${PORT}
 
 # Start n8n
 CMD ["n8n"]
