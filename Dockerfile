@@ -1,18 +1,18 @@
-# Railway-compatible n8n build (x86 compatible)
+# Railway-compatible n8n build (dynamic PORT)
 FROM n8nio/n8n:1.74.0
 
-# Railway provides a dynamic port -> force n8n to use it
+# Force n8n to use Railway-assigned port
 ENV N8N_PORT=${PORT}
 ENV N8N_HOST=0.0.0.0
 ENV N8N_PROTOCOL=http
 
-# Set correct webhook URL for Railway
+# Correct Railway webhook URL
 ENV WEBHOOK_URL=https://${RAILWAY_STATIC_URL}
 
-# n8n must run in main process mode for Railway
+# Remove deprecated variable
 ENV EXECUTIONS_PROCESS=main
 
-# Expose the dynamic port used by Railway
+# Expose Railway’s dynamic port
 EXPOSE ${PORT}
 
-# The base image already launches n8n — no CMD needed
+# Official entrypoint runs n8n
