@@ -31,9 +31,10 @@ RUN npm install --prefix /home/node/.n8n/custom n8n-nodes-ai
 # OPTIONAL (OpenAI official SDK)
 ###############################
 
-RUN npm install --prefix /home/node/.n8n/custom @openai/openai
-RUN npm install --prefix /home/node/.n8n/custom @langchain/openai
-RUN npm install --prefix /home/node/.n8n/custom @langchain/community
+RUN npm install --prefix /home/node/.n8n/custom @n8n-nodes/langchain
+RUN npm install --prefix /home/node/.n8n/custom @n8n-nodes/gpt
+RUN npm install --prefix /home/node/.n8n/custom @n8n-nodes/anthropic
+RUN npm install --prefix /home/node/.n8n/custom @n8n-nodes/openai
 
 ###############################
 # FORCE RAILWAY REBUILD
