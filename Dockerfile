@@ -12,33 +12,29 @@ ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 # Required for Railway
 ENV EXECUTIONS_PROCESS=main
 
+
 ###############################
 # INSTALL COMMUNITY AI NODES
 ###############################
 
+# Create custom folder
 RUN mkdir -p /home/node/.n8n/custom
 
-# LangChain (community)
-RUN npm install --prefix /home/node/.n8n/custom n8n-nodes-langchain
+# LangChain community nodes (VALID)
+RUN npm install --prefix /home/node/.n8n/custom n8n-nodes-langchain@latest
 
-# AI Gateway (useful for multi-models)
-RUN npm install --prefix /home/node/.n8n/custom n8n-nodes-aigateway
+# AI Gateway nodes (VALID)
+RUN npm install --prefix /home/node/.n8n/custom n8n-nodes-aigateway@latest
 
-# Generic AI nodes pack
-RUN npm install --prefix /home/node/.n8n/custom n8n-nodes-ai
+# (Optional) Additional generic AI helpers
+RUN npm install --prefix /home/node/.n8n/custom n8n-nodes-chatgpt@latest
 
-###############################
-# OPTIONAL (OpenAI official SDK)
-###############################
-
-RUN npm install --prefix /home/node/.n8n/custom @n8n-nodes/langchain
-RUN npm install --prefix /home/node/.n8n/custom @n8n-nodes/gpt
-RUN npm install --prefix /home/node/.n8n/custom @n8n-nodes/anthropic
-RUN npm install --prefix /home/node/.n8n/custom @n8n-nodes/openai
 
 ###############################
 # FORCE RAILWAY REBUILD
 ###############################
-RUN echo "force_rebuild_railway_2025" > /home/node/force.txt
+RUN echo "railway_rebuild_2025_12_11" > /home/node/.n8n/rebuild.txt
 
+
+# Expose Railway dynamic port
 EXPOSE ${PORT}
