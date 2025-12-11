@@ -10,3 +10,6 @@ ENV WEBHOOK_URL=https://your-app.up.railway.app/
 
 # Expose Railway-assigned port
 EXPOSE ${PORT}
+
+# ❌ IMPORTANT : NO CMD HERE
+# The official n8n image already has the correct ENTRYPOINT
