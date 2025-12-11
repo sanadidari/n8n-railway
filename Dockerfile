@@ -1,14 +1,12 @@
-# Railway-compatible n8n build (x86 compatible)
-FROM n8nio/n8n:1.74.0
+# Stable multi-architecture image (works on Railway ARM builders)
+FROM n8nio/n8n:1.78.1
 
 # Railway uses the PORT environment variable
 ENV N8N_PORT=${PORT}
 ENV N8N_HOST=0.0.0.0
 
-# Replace this with your real Railway URL
+# Replace this with your Railway domain
 ENV WEBHOOK_URL=https://your-app.up.railway.app/
 
-# Expose Railway-assigned port
+# Expose Railway port
 EXPOSE ${PORT}
-
-# ❌ DO NOT ADD CMD — the official ENTRYPOINT already runs n8n
