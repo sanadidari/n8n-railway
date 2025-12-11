@@ -1,18 +1,19 @@
-# Railway-compatible n8n build (x86)
 FROM n8nio/n8n:1.74.0
 
-# Use Railway dynamic port
-ENV PORT=${PORT}
+# Railway dynamic port
 ENV N8N_PORT=${PORT}
+ENV PORT=${PORT}
 ENV N8N_HOST=0.0.0.0
 ENV N8N_PROTOCOL=http
+
+# URL webhook automatique
 ENV WEBHOOK_URL=https://${RAILWAY_STATIC_URL}
 
-# Disable permission warnings
+# Fix permissions warning
 ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
 
-# Expose the dynamic port
+# Expose dynamic port
 EXPOSE ${PORT}
 
-# Force n8n to listen on the Railway port instead of 8080
-CMD ["sh", "-c", "n8n start --port ${PORT} --host 0.0.0.0"]
+# Launch n8n *explicitly* on Railway port
+CMD ["sh", "-c", "n8n start --tunnel --port ${PORT} --host 0.0.0.0"]
