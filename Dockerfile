@@ -1,41 +1,43 @@
 FROM n8nio/n8n:1.74.0
 
-# ===================================================
-#   1) CONFIGURATION RAILWAY (PORT, HOST, WEBHOOKS)
-# ===================================================
+# Force n8n to use Railway dynamic port
 ENV N8N_PORT=${PORT}
 ENV N8N_PROTOCOL=http
 ENV N8N_HOST=0.0.0.0
 ENV WEBHOOK_URL=https://${RAILWAY_STATIC_URL}
+
+# Fix permissions warning
 ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+
+# Required for Railway
 ENV EXECUTIONS_PROCESS=main
 
-# ===================================================
-#   2) INSTALLATION DES COMMUNITY NODES (AI PLUGINS)
-# ===================================================
-USER root
+###############################
+# INSTALL COMMUNITY AI NODES
+###############################
+
 RUN mkdir -p /home/node/.n8n/custom
 
-# OpenAI official nodes
-RUN npm install --prefix /home/node/.n8n/custom n8n-nodes-openai
+# LangChain (community)
+RUN npm install --prefix /home/node/.n8n/custom n8n-nodes-langchain
 
-# LangChain official
-RUN npm install --prefix /home/node/.n8n/custom @n8n/nodes-langchain
+# AI Gateway (useful for multi-models)
+RUN npm install --prefix /home/node/.n8n/custom n8n-nodes-aigateway
 
-# ChatGPT community
-RUN npm install --prefix /home/node/.n8n/custom n8n-nodes-chatgpt
+# Generic AI nodes pack
+RUN npm install --prefix /home/node/.n8n/custom n8n-nodes-ai
 
-# LangChain community ext (advanced LLM tools)
-RUN npm install --prefix /home/node/.n8n/custom n8n-nodes-langchain-community
+###############################
+# OPTIONAL (OpenAI official SDK)
+###############################
 
-# Fix permissions
-RUN chown -R node:node /home/node/.n8n
+RUN npm install --prefix /home/node/.n8n/custom @openai/openai
+RUN npm install --prefix /home/node/.n8n/custom @langchain/openai
+RUN npm install --prefix /home/node/.n8n/custom @langchain/community
 
-USER node
-
-# ===================================================
-#   3) FORCE REBUILD POUR RAILWAY
-# ===================================================
-RUN echo "force_rebuild_railway_2025_v2" > /home/node/.n8n/rebuild.txt
+###############################
+# FORCE RAILWAY REBUILD
+###############################
+RUN echo "force_rebuild_railway_2025" > /home/node/force.txt
 
 EXPOSE ${PORT}
