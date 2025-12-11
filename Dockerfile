@@ -13,6 +13,6 @@ ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 ENV EXECUTIONS_PROCESS=main
 
 # --- IMPORTANT: FORCE RAILWAY TO REBUILD ---
-RUN echo "force_rebuild_railway_2025" > /data/force.txt
+RUN echo "force_rebuild_railway_2025" > /home/node/force.txt
 
 EXPOSE ${PORT}
