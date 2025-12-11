@@ -1,5 +1,5 @@
 # Railway-compatible n8n build (x86 compatible)
-FROM n8nio/n8n:1.85.0-debian
+FROM n8nio/n8n:1.84.1-debian
 
 # Railway uses the PORT environment variable
 ENV N8N_PORT=${PORT}
