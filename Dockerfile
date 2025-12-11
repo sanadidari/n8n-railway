@@ -6,8 +6,8 @@ ENV N8N_PORT=${PORT}
 ENV N8N_PROTOCOL=http
 ENV N8N_HOST=0.0.0.0
 
-# Required for running on platforms with dynamic ports
-ENV WEBHOOK_URL=https://${RAILWAY_STATIC_URL}
+# Your real Railway domain (replace with yours)
+ENV WEBHOOK_URL=amusing-caring-production.up.railway.app
 
 # Force n8n to listen on the assigned Railway port
 ENV EXECUTIONS_PROCESS=main
